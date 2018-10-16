@@ -13,6 +13,8 @@ Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "SimpleStackApplication", "S
 EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "ReverseSeries", "ReverseSeries\ReverseSeries.vcxproj", "{89BFC22F-3A8E-495B-8D70-8F309FF87427}"
 EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "ConvertDecimaltoBinary", "ConvertDecimaltoBinary\ConvertDecimaltoBinary.vcxproj", "{2A4895E6-FBFE-441A-9D5B-A64451AE3162}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|x64 = Debug|x64
@@ -61,6 +63,14 @@ Global
 		{89BFC22F-3A8E-495B-8D70-8F309FF87427}.Release|x64.Build.0 = Release|x64
 		{89BFC22F-3A8E-495B-8D70-8F309FF87427}.Release|x86.ActiveCfg = Release|Win32
 		{89BFC22F-3A8E-495B-8D70-8F309FF87427}.Release|x86.Build.0 = Release|Win32
+		{2A4895E6-FBFE-441A-9D5B-A64451AE3162}.Debug|x64.ActiveCfg = Debug|x64
+		{2A4895E6-FBFE-441A-9D5B-A64451AE3162}.Debug|x64.Build.0 = Debug|x64
+		{2A4895E6-FBFE-441A-9D5B-A64451AE3162}.Debug|x86.ActiveCfg = Debug|Win32
+		{2A4895E6-FBFE-441A-9D5B-A64451AE3162}.Debug|x86.Build.0 = Debug|Win32
+		{2A4895E6-FBFE-441A-9D5B-A64451AE3162}.Release|x64.ActiveCfg = Release|x64
+		{2A4895E6-FBFE-441A-9D5B-A64451AE3162}.Release|x64.Build.0 = Release|x64
+		{2A4895E6-FBFE-441A-9D5B-A64451AE3162}.Release|x86.ActiveCfg = Release|Win32
+		{2A4895E6-FBFE-441A-9D5B-A64451AE3162}.Release|x86.Build.0 = Release|Win32
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
