@@ -1,5 +1,6 @@
 #pragma once
 #include <stdlib.h>
+#include <stdbool.h>
 
 // Stasck ADT Type Definitions
 typedef struct node {

@@ -117,7 +117,6 @@
   <ItemGroup>
     <ClCompile Include="HashedListSearch.c" />
     <ClCompile Include="main.c" />
-    <ClCompile Include="prefixToPostFix.cpp" />
     <ClCompile Include="search.c" />
     <ClCompile Include="sort.c" />
   </ItemGroup>
@@ -129,7 +128,6 @@
     <ClInclude Include="HeapADT.h" />
     <ClInclude Include="ListADT.h" />
     <ClInclude Include="queueADT.h" />
-    <ClInclude Include="stackADT.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
