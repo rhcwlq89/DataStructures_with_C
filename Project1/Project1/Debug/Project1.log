@@ -12,8 +12,6 @@ d:\github\datastructures_with_c\project1\project1\hashedlistsearch.c(137): error
   c:\program files (x86)\windows kits\10\include\10.0.17134.0\ucrt\stdio.h(1274): note: 'scanf' 선언을 참조하십시오.
 d:\github\datastructures_with_c\project1\project1\hashedlistsearch.c(155): error C4996: 'scanf': This function or variable may be unsafe. Consider using scanf_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
   c:\program files (x86)\windows kits\10\include\10.0.17134.0\ucrt\stdio.h(1274): note: 'scanf' 선언을 참조하십시오.
-  main.c
-  search.c
   sort.c
 d:\github\datastructures_with_c\project1\project1\sort.c(47): warning C4013: 'reheapUp'이(가) 정의되지 않았습니다. extern은 int형을 반환하는 것으로 간주합니다.
 d:\github\datastructures_with_c\project1\project1\sort.c(56): warning C4013: 'reheapDown'이(가) 정의되지 않았습니다. extern은 int형을 반환하는 것으로 간주합니다.
@@ -24,4 +22,3 @@ d:\github\datastructures_with_c\project1\project1\sort.c(262): warning C4013: 'q
 d:\github\datastructures_with_c\project1\project1\sort.c(278): error C2371: 'quickInsertion': 재정의. 기본 형식이 다릅니다.
 d:\github\datastructures_with_c\project1\project1\sort.c(306): error C2371: 'medianLeft': 재정의. 기본 형식이 다릅니다.
   코드를 생성하고 있습니다...
-d:\github\datastructures_with_c\project1\project1\stackadt.h(180): warning C4716: 'destroyStack': 값을 반환해야 합니다.

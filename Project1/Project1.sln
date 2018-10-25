@@ -29,6 +29,8 @@ Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "AcademyAwards", "AcademyAwa
 EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "Huffman", "Huffman\Huffman.vcxproj", "{96B42143-F75B-4515-A2ED-30156501B351}"
 EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "BSTInteger", "BSTInteger\BSTInteger.vcxproj", "{59E34D34-E066-41ED-8AD8-CFA2E45A118F}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|x64 = Debug|x64
@@ -141,6 +143,14 @@ Global
 		{96B42143-F75B-4515-A2ED-30156501B351}.Release|x64.Build.0 = Release|x64
 		{96B42143-F75B-4515-A2ED-30156501B351}.Release|x86.ActiveCfg = Release|Win32
 		{96B42143-F75B-4515-A2ED-30156501B351}.Release|x86.Build.0 = Release|Win32
+		{59E34D34-E066-41ED-8AD8-CFA2E45A118F}.Debug|x64.ActiveCfg = Debug|x64
+		{59E34D34-E066-41ED-8AD8-CFA2E45A118F}.Debug|x64.Build.0 = Debug|x64
+		{59E34D34-E066-41ED-8AD8-CFA2E45A118F}.Debug|x86.ActiveCfg = Debug|Win32
+		{59E34D34-E066-41ED-8AD8-CFA2E45A118F}.Debug|x86.Build.0 = Debug|Win32
+		{59E34D34-E066-41ED-8AD8-CFA2E45A118F}.Release|x64.ActiveCfg = Release|x64
+		{59E34D34-E066-41ED-8AD8-CFA2E45A118F}.Release|x64.Build.0 = Release|x64
+		{59E34D34-E066-41ED-8AD8-CFA2E45A118F}.Release|x86.ActiveCfg = Release|Win32
+		{59E34D34-E066-41ED-8AD8-CFA2E45A118F}.Release|x86.Build.0 = Release|Win32
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
