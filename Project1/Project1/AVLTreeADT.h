@@ -249,11 +249,11 @@ NODE* rotateRight(NODE* root) {
 		Post	Balance restored; return potentially new root
 */
 NODE* insLeftBal(NODE* root, bool* taller) {
-	//Local Definitions
+	// Local Definitions
 	NODE* rightTree;
 	NODE* leftTree;
 
-	//Statements
+	// Statements
 	leftTree = root->left;
 	switch (leftTree->bal) {
 		case LH: 
@@ -298,6 +298,62 @@ NODE* insLeftBal(NODE* root, bool* taller) {
 	} // switch
 	return root;
 } // leftBalance
+
+/*	insRightBalance
+	Tree out-of-balance to the right. This function
+	rotates the tree to the left.
+		Pre		The tree is left high
+		Post	Balance restored; return potentially new root
+*/
+NODE* insRightBal(NODE* root, bool* taller) {
+	// Local Definitions
+	NODE* rightTree;
+	NODE* leftTree;
+
+	// Statements
+	rightTree = root->right;
+	switch (rightTree->bal) {
+		case LH :	// Left High-Requires double
+					// rotation : first right, then left
+			leftTree = rightTree->left;
+			switch (leftTree->bal) {
+				case LH: 
+					root->bal = EH;
+					rightTree->bal = RH;
+					break;
+				case EH: 
+					root->bal = EH;
+					rightTree->bal = RH;
+					break;
+				case RH: 
+					root->bal = LH;
+					rightTree->bal = EH;
+					break;
+			} // switch leftTree
+
+			leftTree->bal = EH;
+			// Rotate Right
+			root->right = rotateRight(rightTree);
+
+			// Rotate Right
+			root = rotateLeft(root);
+			*taller = false;
+			break;
+		case EH : // This is an error
+			printf("\n\aError in insRightBal\n");
+			exit(100);
+		case RH : // Right High -- Rotate Left
+			root->bal = EH;
+			rightTree->bal = EH;
+
+			// Rotate Left
+			root = rotateLeft(root);
+			*taller = false;
+			break;
+	} // switch
+
+	return root;
+} // RightBalance
 
 /*	_insert
 	This function uses recursion to insert the new data
@@ -564,3 +620,72 @@ NODE* dltRightBal(NODE* root, bool* shorter) {
 	return root;
 } // dltRightBal
 
+/*	dltLeftBal
+	The tree is shorter after a delete on the right. This
+	function adjusts the balance factors and rotates the
+	tree to the right if necessary.
+		Pre		tree shorter
+		Post	Balance factors reset-balance restored
+		Returns	potentially new root
+*/
+NODE* dltLeftBal(NODE* root, bool* shorter) {
+	// Local Definitions
+	NODE* rightTree;
+	NODE* leftTree;
+
+	// Statements
+	switch (root->bal) {
+		case LH : // Left High - Rotate Right
+			leftTree = root->left;
+			if (leftTree->bal == RH) {
+				// Double rotation required
+				rightTree = leftTree->right;
+
+				switch (rightTree->bal) {
+					case LH : 
+						root->bal = RH;
+						leftTree->bal = EH;
+						break;
+					case EH : 
+						root->bal = EH;
+						leftTree->bal = EH;
+						break;
+					case RH :
+						root->bal = EH;
+						leftTree->bal = LH;
+						break;
+				} // switch
+
+				rightTree->bal = EH;
+
+				// Rotate Left then Right
+				root->right = rotateLeft(leftTree);
+				root = rotateRight(root);
+			} // if leftTree->bal == LH
+			else {
+				// Single Rotation Only
+				switch (leftTree->bal) {
+					case LH :
+					case RH :
+						root->bal = EH;
+						leftTree->bal = EH;
+						break;
+					case EH : 
+						root->bal = LH;
+						leftTree->bal = RH;
+						*shorter = false;
+						break;
+				} // switch leftTree->bal
+				root = rotateLeft(root);
+			} // else
+			break;
+		case EH : // Now Left high
+			root->bal = RH;
+			*shorter = false;
+			break;
+		case RH : // Deleted Right -- Now balanced
+			root->bal = EH;
+			break;
+	} // switch
+	return root;
+} // dltLeftBal
