@@ -86,9 +86,9 @@ bool heapInsert(HEAP* heap, void* dataPtr) {
 		Return	true if successful; false if array empty
 */
 bool heapDelete(HEAP* heap, void** dataOutPtr) {
-	//Statements
+	// Statements
 	if (heap->size == 0) {
-		//heap empty
+		// heap empty
 		return false;
 	}
 	*dataOutPtr = heap->heapAry[0];
@@ -99,6 +99,13 @@ bool heapDelete(HEAP* heap, void** dataOutPtr) {
 	return true;
 } // heapDelete
 
+/*	reheapUp
+	Reestablishes heap by moving data in child up to
+	correct location heap array.
+		Pre		heap is array containing an invalid heap
+				newNode is index to new data in heap
+		Post	newNode inserted into heap
+*/
 void _reheapUp(HEAP* heap, int childLoc) {
 	// Local Definitions
 	int parent;
@@ -169,4 +176,36 @@ void _reheapDown(HEAP* heap, int root) {
 	return;
 } // reheapDown
 
+/*	heapCount
+	Returns number of nodes in heap.
+*/
+int heapCount(HEAP* heap) {
+	return heap->size;
+}
+
+/*	heapFull
+	If there is no room for another node, returns true.
+*/
+bool heapFull(HEAP* heap) {
+	return (heap->size >= heap->maxSize);
+}
+
+/*	heapEmpty
+	Returns true if heap is empty; false if any data.
+*/
+bool heapEmpty(HEAP* heap) {
+	// Statements
+	return (heap->size == 0);
+} // heapEmpty
+
+/*	heapDestroy
+	Deletes heap and recycles memory
+*/
+void heapDestroy(HEAP* heap) {
+	if (heap)
+		return;
+
+	free(heap);
+	return;
+}
 
