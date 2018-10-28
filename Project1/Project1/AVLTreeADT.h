@@ -162,7 +162,7 @@ bool AVL_Empty(AVL_TREE* tree) {
 /*	AVL_Full
 	If there is no room for another node, returns true.
 		Pre		Tree has been created
-		Returns	True if no room for another insert, 
+		Returns	True if no room for another insert,
 				false if room.
 */
 bool AVL_Full(AVL_TREE* tree) {
@@ -256,45 +256,45 @@ NODE* insLeftBal(NODE* root, bool* taller) {
 	// Statements
 	leftTree = root->left;
 	switch (leftTree->bal) {
-		case LH: 
-			// Left High -- Rotate Right
-			root->bal = EH;
+	case LH:
+		// Left High -- Rotate Right
+		root->bal = EH;
+		leftTree->bal = EH;
+
+		// Rotate Right
+		root = rotateRight(root);
+		*taller = false;
+		break;
+	case EH:
+		// This is an error
+		printf("\n\aError in insLeftBal\n");
+		exit(100);
+	case RH:
+		// Right High - Requires double
+		// rotation: first left, then right
+		rightTree = leftTree->right;
+		switch (rightTree->bal) {
+		case LH:
+			root->bal = RH;
 			leftTree->bal = EH;
-
-			// Rotate Right
-			root = rotateRight(root);
-			*taller = false;
 			break;
-		case EH: 
-			// This is an error
-			printf("\n\aError in insLeftBal\n");
-			exit(100);
-		case RH: 
-			// Right High - Requires double
-			// rotation: first left, then right
-			rightTree = leftTree->right;
-			switch (rightTree->bal) {
-				case LH :
-					root->bal = RH;
-					leftTree->bal = EH;
-					break;
-				case EH:
-					root->bal = EH;
-					leftTree->bal = LH;
-					break;
-				case RH:
-					root->bal = EH;
-					leftTree->bal = LH;
-					break;
-			} // switch rightTree
+		case EH:
+			root->bal = EH;
+			leftTree->bal = LH;
+			break;
+		case RH:
+			root->bal = EH;
+			leftTree->bal = LH;
+			break;
+		} // switch rightTree
 
-			rightTree->bal = EH;
-			//Rotate Left
-			root->left = rotateLeft(leftTree);
+		rightTree->bal = EH;
+		//Rotate Left
+		root->left = rotateLeft(leftTree);
 
-			//Rotate Right
-			root = rotateRight(root);
-			*taller = false;
+		//Rotate Right
+		root = rotateRight(root);
+		*taller = false;
 	} // switch
 	return root;
 } // leftBalance
@@ -313,43 +313,43 @@ NODE* insRightBal(NODE* root, bool* taller) {
 	// Statements
 	rightTree = root->right;
 	switch (rightTree->bal) {
-		case LH :	// Left High-Requires double
-					// rotation : first right, then left
-			leftTree = rightTree->left;
-			switch (leftTree->bal) {
-				case LH: 
-					root->bal = EH;
-					rightTree->bal = RH;
-					break;
-				case EH: 
-					root->bal = EH;
-					rightTree->bal = RH;
-					break;
-				case RH: 
-					root->bal = LH;
-					rightTree->bal = EH;
-					break;
-			} // switch leftTree
-
-			leftTree->bal = EH;
-			// Rotate Right
-			root->right = rotateRight(rightTree);
-
-			// Rotate Right
-			root = rotateLeft(root);
-			*taller = false;
-			break;
-		case EH : // This is an error
-			printf("\n\aError in insRightBal\n");
-			exit(100);
-		case RH : // Right High -- Rotate Left
+	case LH:	// Left High-Requires double
+				// rotation : first right, then left
+		leftTree = rightTree->left;
+		switch (leftTree->bal) {
+		case LH:
 			root->bal = EH;
-			rightTree->bal = EH;
-
-			// Rotate Left
-			root = rotateLeft(root);
-			*taller = false;
+			rightTree->bal = RH;
 			break;
+		case EH:
+			root->bal = EH;
+			rightTree->bal = RH;
+			break;
+		case RH:
+			root->bal = LH;
+			rightTree->bal = EH;
+			break;
+		} // switch leftTree
+
+		leftTree->bal = EH;
+		// Rotate Right
+		root->right = rotateRight(rightTree);
+
+		// Rotate Right
+		root = rotateLeft(root);
+		*taller = false;
+		break;
+	case EH: // This is an error
+		printf("\n\aError in insRightBal\n");
+		exit(100);
+	case RH: // Right High -- Rotate Left
+		root->bal = EH;
+		rightTree->bal = EH;
+
+		// Rotate Left
+		root = rotateLeft(root);
+		*taller = false;
+		break;
 	} // switch
 
 	return root;
@@ -379,19 +379,19 @@ NODE* _insert(AVL_TREE* tree, NODE* root, NODE* newPtr, bool* taller) {
 		if (*taller) {
 			// Left subtree is taller
 			switch (root->bal) {
-				case LH: // Was left high--rotate
-					root = insLeftBal(root, taller);
-					break;
-				case EH: // Was balanced--now LH
-					root->bal = LH;
-					break;
-				case RH: // Was right high--now EH
-					root->bal = EH;
-					*taller = false;
-					break;
+			case LH: // Was left high--rotate
+				root = insLeftBal(root, taller);
+				break;
+			case EH: // Was balanced--now LH
+				root->bal = LH;
+				break;
+			case RH: // Was right high--now EH
+				root->bal = EH;
+				*taller = false;
+				break;
 			} // switch
 			return root;
-		} 
+		}
 	} // new < node
 	else {
 		// new data >= root data
@@ -400,16 +400,16 @@ NODE* _insert(AVL_TREE* tree, NODE* root, NODE* newPtr, bool* taller) {
 		if (*taller) {
 			// Right subtree is taller
 			switch (*taller) {
-				case LH: // Was left high -- now EH
-					root->bal = EH;
-					*taller = false;
-					break;
-				case EH: // Was balanced -- now RH
-					root->bal = RH;
-					break;
-				case RH: // Was right high -- rotate
-					root = insRightBal(root, taller);
-					break;
+			case LH: // Was left high -- now EH
+				root->bal = EH;
+				*taller = false;
+				break;
+			case EH: // Was balanced -- now RH
+				root->bal = RH;
+				break;
+			case RH: // Was right high -- rotate
+				root = insRightBal(root, taller);
+				break;
 			} // switch
 		}
 		return root;
@@ -445,7 +445,7 @@ NODE* _delete(AVL_TREE* tree, NODE* root, void* dltKey, bool* shorter, bool* suc
 		root->left = _delete(tree, root->left, dltKey, shorter, success);
 		if (*shorter) {
 			root = dltRightBal(root, shorter);
-		} 
+		}
 	} // if less
 	else if (tree->compare(dltKey, root->dataPtr) > 0) {
 		root->right = _delete(tree, root->right, dltKey, shorter, success);
@@ -455,6 +455,8 @@ NODE* _delete(AVL_TREE* tree, NODE* root, void* dltKey, bool* shorter, bool* suc
 	} // if greater
 	else {
 		// Found equal node
+		dltPtr = root;
+
 		if (!root->right) {
 			// Only left subtree
 			newRoot = root->left;
@@ -482,7 +484,7 @@ NODE* _delete(AVL_TREE* tree, NODE* root, void* dltKey, bool* shorter, bool* suc
 				if (*shorter)
 					root = dltRightBal(root, shorter);
 			} // else
-		} 
+		}
 	} // equal node
 	return root;
 }
@@ -563,59 +565,59 @@ NODE* dltRightBal(NODE* root, bool* shorter) {
 
 	//Statements
 	switch (root->bal) {
-		case LH:
-			// Deleted Left -- Now balanced
-			root->bal = EH;
-			break;
-		case EH:
-			// Now Right high
-			root->bal = RH;
-			*shorter = false;
-			break;
-		case RH:
-			// Right High - Rotate Left
-			rightTree = root->right;
-			if (rightTree->bal == LH) {
-				// Double rotation required
-				leftTree = rightTree->left;
+	case LH:
+		// Deleted Left -- Now balanced
+		root->bal = EH;
+		break;
+	case EH:
+		// Now Right high
+		root->bal = RH;
+		*shorter = false;
+		break;
+	case RH:
+		// Right High - Rotate Left
+		rightTree = root->right;
+		if (rightTree->bal == LH) {
+			// Double rotation required
+			leftTree = rightTree->left;
 
-				switch (leftTree->bal) {
-					case LH:
-						rightTree->bal = RH;
-						root->bal = EH;
-						break;
-					case EH:
-						root->bal = EH;
-						rightTree->bal = EH;
-						break;
-					case RH:
-						root->bal = LH;
-						rightTree->bal = EH;
-						break;
-				} // switch
+			switch (leftTree->bal) {
+			case LH:
+				rightTree->bal = RH;
+				root->bal = EH;
+				break;
+			case EH:
+				root->bal = EH;
+				rightTree->bal = EH;
+				break;
+			case RH:
+				root->bal = LH;
+				rightTree->bal = EH;
+				break;
+			} // switch
 
-				leftTree->bal = EH;
+			leftTree->bal = EH;
 
-				// Rotate Right then Left
-				root->right = rotateRight(rightTree);
-				root = rotateLeft(root);
-			} // if rightTree->bal == LH
-			else {
-				//Single Rotation Only
-				switch (rightTree->bal) {
-					case LH:
-					case RH:
-						root->bal = EH;
-						rightTree->bal = EH;
-						break;
-					case EH:
-						root->bal = RH;
-						rightTree->bal = LH;
-						*shorter = false;
-						break;
-				} // switch rightTree->bal
-				root = rotateLeft(root);
-			} // else
+			// Rotate Right then Left
+			root->right = rotateRight(rightTree);
+			root = rotateLeft(root);
+		} // if rightTree->bal == LH
+		else {
+			//Single Rotation Only
+			switch (rightTree->bal) {
+			case LH:
+			case RH:
+				root->bal = EH;
+				rightTree->bal = EH;
+				break;
+			case EH:
+				root->bal = RH;
+				rightTree->bal = LH;
+				*shorter = false;
+				break;
+			} // switch rightTree->bal
+			root = rotateLeft(root);
+		} // else
 	} // switch
 	return root;
 } // dltRightBal
@@ -635,57 +637,57 @@ NODE* dltLeftBal(NODE* root, bool* shorter) {
 
 	// Statements
 	switch (root->bal) {
-		case LH : // Left High - Rotate Right
-			leftTree = root->left;
-			if (leftTree->bal == RH) {
-				// Double rotation required
-				rightTree = leftTree->right;
+	case LH: // Left High - Rotate Right
+		leftTree = root->left;
+		if (leftTree->bal == RH) {
+			// Double rotation required
+			rightTree = leftTree->right;
 
-				switch (rightTree->bal) {
-					case LH : 
-						root->bal = RH;
-						leftTree->bal = EH;
-						break;
-					case EH : 
-						root->bal = EH;
-						leftTree->bal = EH;
-						break;
-					case RH :
-						root->bal = EH;
-						leftTree->bal = LH;
-						break;
-				} // switch
+			switch (rightTree->bal) {
+			case LH:
+				root->bal = RH;
+				leftTree->bal = EH;
+				break;
+			case EH:
+				root->bal = EH;
+				leftTree->bal = EH;
+				break;
+			case RH:
+				root->bal = EH;
+				leftTree->bal = LH;
+				break;
+			} // switch
 
-				rightTree->bal = EH;
+			rightTree->bal = EH;
 
-				// Rotate Left then Right
-				root->right = rotateLeft(leftTree);
-				root = rotateRight(root);
-			} // if leftTree->bal == LH
-			else {
-				// Single Rotation Only
-				switch (leftTree->bal) {
-					case LH :
-					case RH :
-						root->bal = EH;
-						leftTree->bal = EH;
-						break;
-					case EH : 
-						root->bal = LH;
-						leftTree->bal = RH;
-						*shorter = false;
-						break;
-				} // switch leftTree->bal
-				root = rotateLeft(root);
-			} // else
-			break;
-		case EH : // Now Left high
-			root->bal = RH;
-			*shorter = false;
-			break;
-		case RH : // Deleted Right -- Now balanced
-			root->bal = EH;
-			break;
+			// Rotate Left then Right
+			root->right = rotateLeft(leftTree);
+			root = rotateRight(root);
+		} // if leftTree->bal == LH
+		else {
+			// Single Rotation Only
+			switch (leftTree->bal) {
+			case LH:
+			case RH:
+				root->bal = EH;
+				leftTree->bal = EH;
+				break;
+			case EH:
+				root->bal = LH;
+				leftTree->bal = RH;
+				*shorter = false;
+				break;
+			} // switch leftTree->bal
+			root = rotateLeft(root);
+		} // else
+		break;
+	case EH: // Now Left high
+		root->bal = RH;
+		*shorter = false;
+		break;
+	case RH: // Deleted Right -- Now balanced
+		root->bal = EH;
+		break;
 	} // switch
 	return root;
 } // dltLeftBal
